@@ -7,8 +7,7 @@ import { useParams } from "next/navigation";
 import css from "./NoteDetails.module.css";
 
 import { fetchSingleNoteById } from "@/lib/api";
-import { strict } from "assert";
-import { string } from "yup";
+
 import Modal from "@/components/Modal/Modal";
 import Loader from "@/components/Loader/Loader";
 
