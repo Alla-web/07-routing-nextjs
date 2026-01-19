@@ -16,21 +16,19 @@ interface NotesProps {
 }
 
 export default async function Notes({ params, searchParams }: NotesProps) {
-  const { slug } = await params;
-  const tag = slug[0] === "all" ? undefined : slug[0];
+  const { slug } = (await params) ?? {};
+  const first = slug?.[0] ?? "all";
+  const tag = first === "all" ? undefined : first;
 
   const sp = (await searchParams) ?? {};
   const page = Number(sp.page ?? "1") || 1;
   const search = sp.search ?? "";
 
-  console.log(page);
-  console.log(search);
-
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ["notes", page, search, tag],
-    queryFn: () => fetchNotes(page, search),
+    queryFn: () => fetchNotes(page, search, tag),
   });
 
   return (
