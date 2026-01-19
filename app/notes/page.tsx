@@ -8,13 +8,17 @@ import { fetchNotes } from "@/lib/api";
 import NotesPage from "@/app/notes/Notes.client";
 
 interface NotesProps {
+  params: Promise<{ slug: string }>;
   searchParams?: Promise<{
     page?: string;
     search?: string;
   }>;
 }
 
-export default async function Notes({ searchParams }: NotesProps) {
+export default async function Notes({ params, searchParams }: NotesProps) {
+  const { slug } = await params;
+  const tag = slug[0] === "all" ? undefined : slug[0];
+
   const sp = (await searchParams) ?? {};
   const page = Number(sp.page ?? "1") || 1;
   const search = sp.search ?? "";
@@ -25,7 +29,7 @@ export default async function Notes({ searchParams }: NotesProps) {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["notes", page, search],
+    queryKey: ["notes", page, search, tag],
     queryFn: () => fetchNotes(page, search),
   });
 

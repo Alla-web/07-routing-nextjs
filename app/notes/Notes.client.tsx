@@ -16,7 +16,11 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 import ErrorBox from "@/components/ErrorBox/ErrorBox";
 import Loader from "@/components/Loader/Loader";
 
-export default function NotesPage() {
+interface NotesPageProps {
+  tag?: string;
+}
+
+export default function NotesPage({ tag }: NotesPageProps) {
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -24,8 +28,8 @@ export default function NotesPage() {
 
   const { data, isLoading, isError, error, isRefetching } =
     useQuery<FetchNotesResponse>({
-      queryKey: ["notes", page, debauncedSearch],
-      queryFn: () => fetchNotes(page, debauncedSearch),
+      queryKey: ["notes", page, debauncedSearch, tag],
+      queryFn: () => fetchNotes(page, debauncedSearch, tag),
       placeholderData: keepPreviousData,
       staleTime: 60 * 1000,
     });
@@ -53,7 +57,7 @@ export default function NotesPage() {
             Create note +
           </button>
         </header>
-        <div>
+        <div className={css.contentContainer}>
           {isLoading && <Loader />}
 
           {data && !isLoading && <NoteList notes={data.notes} />}
