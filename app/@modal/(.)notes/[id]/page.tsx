@@ -1,6 +1,5 @@
 import { fetchSingleNoteById } from "@/lib/api";
 import Modal from "@/components/Modal/Modal";
-import { updateTag } from "next/cache";
 
 interface NotePreviewProps {
   params: Promise<{ id: string }>;

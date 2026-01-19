@@ -1,5 +1,4 @@
 import {
-  useQueryClient,
   HydrationBoundary,
   dehydrate,
   QueryClient,
