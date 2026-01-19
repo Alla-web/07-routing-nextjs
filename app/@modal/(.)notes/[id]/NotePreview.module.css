@@ -1,0 +1,13 @@
+.notePreviewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+}
+
+.noteDate {
+  align-self: flex-end;
+}
