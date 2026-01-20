@@ -46,7 +46,6 @@ export async function createNote(payload: CreateNote): Promise<Note> {
       Authorization: `Bearer ${TOKEN}`,
     },
   });
-  console.log(response.data);
   return response.data;
 }
 

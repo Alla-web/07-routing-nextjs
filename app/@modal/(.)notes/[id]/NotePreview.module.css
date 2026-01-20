@@ -11,3 +11,10 @@
 .noteDate {
   align-self: flex-end;
 }
+
+.goBackBtn {
+  padding: 6px 10px;
+  background-color: rgb(233, 250, 255);
+  border: 1px solid gray;
+  border-radius: 6px;
+}

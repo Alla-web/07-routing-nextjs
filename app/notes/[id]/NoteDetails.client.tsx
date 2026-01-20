@@ -19,7 +19,6 @@ export default function NoteDetails() {
   const {
     data: note,
     error,
-    isFetching,
     isLoading,
   } = useQuery({
     queryKey: ["note", id],
@@ -44,8 +43,8 @@ export default function NoteDetails() {
         <Modal onClose={() => setIsOpen(false)}>
           {
             <div className={css.error}>
-              <p>Could not fetch note details.</p>
-              <p>{error.message}</p>
+              <p style={{ fontSize: "20px" }}>Could not fetch note details.</p>
+              <p style={{ color: "black" }}>{error.message}</p>
             </div>
           }
         </Modal>

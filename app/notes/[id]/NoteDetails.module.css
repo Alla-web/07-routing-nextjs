@@ -59,6 +59,7 @@
 }
 
 .error {
-  text-align: center;
+  text-align: start;
+  font-weight: 600;
   color: rgb(244, 92, 92);
 }
