@@ -42,7 +42,7 @@ export default function NotesPreview() {
         </div>
       )}
       {note ? (
-        <Modal>
+        <Modal onClose={() => router.back()}>
           <div className={css.notePreviewContainer}>
             <h2>{note.title}</h2>
             <p>{note.content}</p>

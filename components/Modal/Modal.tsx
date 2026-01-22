@@ -9,16 +9,13 @@ import css from "./Modal.module.css";
 
 interface ModalProps {
   children: React.ReactNode;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
-export default function Modal({ children }: ModalProps) {
-  const router = useRouter();
-  const close = useCallback(() => router.back(), [router]);
-
+export default function Modal({ children, onClose }: ModalProps) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
+      if (event.key === "Escape") onClose();
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -30,10 +27,10 @@ export default function Modal({ children }: ModalProps) {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = prevOverFlow;
     };
-  }, [close]);
+  }, [onClose]);
 
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) close();
+    if (event.target === event.currentTarget) onClose();
   };
 
   return (
@@ -45,7 +42,7 @@ export default function Modal({ children }: ModalProps) {
     >
       <div className={css.modal}>
         <button
-          onClick={close}
+          onClick={onClose}
           className={css.closeButton}
           aria-label="Close modal"
         >
